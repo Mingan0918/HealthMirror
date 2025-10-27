@@ -1,0 +1,285 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block body_class %}booking{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/booking.css' %}">
+<!-- Font Awesome for line icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="booking-container">
+    <!-- 頁面標題 -->
+    <div class="page-header">
+        <h1><i class="far fa-hospital"></i> Medical Appointment Booking</h1>
+        <p>Book your medical appointment online with ease</p>
+    </div>
+
+    <!-- 成功/錯誤消息 -->
+    {% if success_message %}
+    <div class="alert alert-success">
+        <div class="alert-icon"><i class="far fa-check-circle"></i></div>
+        <div class="alert-content">
+            <h3>Booking Confirmed!</h3>
+            <p>{{ success_message }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if error_message %}
+    <div class="alert alert-error">
+        <div class="alert-icon"><i class="far fa-times-circle"></i></div>
+        <div class="alert-content">
+            <h3>Booking Failed</h3>
+            <p>{{ error_message }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="booking-content">
+        <!-- 左側：地圖區域 -->
+        <div class="map-section">
+            <div class="map-header">
+                <h2><i class="far fa-map"></i> Hospital Locations</h2>
+                <p>Select a hospital from the map or list below</p>
+            </div>
+            
+            <!-- 地圖容器 -->
+            <div id="map" class="map-container"></div>
+            
+            <!-- 醫院列表 -->
+            <div class="hospital-list">
+                <h3>Available Hospitals</h3>
+                {% for hospital in hospitals %}
+                <div class="hospital-card" data-lat="{{ hospital.lat }}" data-lng="{{ hospital.lng }}" data-name="{{ hospital.name }}">
+                    <div class="hospital-icon"><i class="far fa-hospital"></i></div>
+                    <div class="hospital-info">
+                        <h4>{{ hospital.name }}</h4>
+                        <p class="hospital-address"><i class="fas fa-map-marker-alt"></i> {{ hospital.address }}</p>
+                        <p class="hospital-phone"><i class="fas fa-phone"></i> {{ hospital.phone }}</p>
+                    </div>
+                    <button class="select-hospital-btn" onclick="selectHospital('{{ hospital.name }}', '{{ hospital.lat }}', '{{ hospital.lng }}')">
+                        Select
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- 右側：預約表單 -->
+        <div class="booking-form-section">
+            <div class="form-header">
+                <h2><i class="far fa-clipboard"></i> Appointment Details</h2>
+                <p>Fill in your information to book an appointment</p>
+            </div>
+
+            <form method="POST" class="booking-form">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="name"><i class="far fa-user"></i> Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone"><i class="fas fa-mobile-alt"></i> Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                </div>
+
+                <div class="form-group">
+                    <label for="hospital"><i class="far fa-hospital"></i> Selected Hospital *</label>
+                    <select id="hospital" name="hospital" required>
+                        <option value="">Select a hospital</option>
+                        {% for hospital in hospitals %}
+                        <option value="{{ hospital.name }}">{{ hospital.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="appointment_date"><i class="far fa-calendar"></i> Appointment Date *</label>
+                        <input type="date" id="appointment_date" name="appointment_date" required min="{{ today }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appointment_time"><i class="far fa-clock"></i> Appointment Time *</label>
+                        <select id="appointment_time" name="appointment_time" required>
+                            <option value="">Select time</option>
+                            <option value="09:00">09:00 AM</option>
+                            <option value="09:30">09:30 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="10:30">10:30 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="11:30">11:30 AM</option>
+                            <option value="14:00">02:00 PM</option>
+                            <option value="14:30">02:30 PM</option>
+                            <option value="15:00">03:00 PM</option>
+                            <option value="15:30">03:30 PM</option>
+                            <option value="16:00">04:00 PM</option>
+                            <option value="16:30">04:30 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message"><i class="far fa-comment"></i> Additional Message (Optional)</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Any special requirements or notes..."></textarea>
+                </div>
+
+                <button type="submit" class="book-btn">
+                    <span class="btn-icon"><i class="far fa-calendar-plus"></i></span>
+                    <span class="btn-text">Book Appointment</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 最近預約記錄 -->
+    {% if user_bookings %}
+    <div class="recent-bookings">
+        <h2><i class="far fa-clipboard"></i> Your Recent Bookings</h2>
+        <div class="bookings-grid">
+            {% for booking in user_bookings %}
+            <div class="booking-card">
+                <div class="booking-status status-{{ booking.status }}">{{ booking.get_status_display }}</div>
+                <div class="booking-details">
+                    <h3>{{ booking.hospital }}</h3>
+                    <p class="booking-date"><i class="far fa-calendar"></i> {{ booking.appointment_date|date:"F d, Y" }}</p>
+                    <p class="booking-time"><i class="far fa-clock"></i> {{ booking.appointment_time|time:"g:i A" }}</p>
+                    <p class="booking-name"><i class="far fa-user"></i> {{ booking.name }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Simple Map Placeholder (without Google Maps API) -->
+<script>
+let selectedHospital = null;
+
+// 初始化簡單地圖顯示
+function initMap() {
+    const mapContainer = document.getElementById("map");
+    
+    // 創建簡單的地圖顯示
+    mapContainer.innerHTML = `
+        <div style="width: 100%; height: 100%; 
+                    background: rgba(255, 255, 255, 0.15);
+                    backdrop-filter: blur(15px);
+                    -webkit-backdrop-filter: blur(15px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    display: flex; align-items: center; justify-content: center; color: #2e3f6b; text-align: center; 
+                    border-radius: 15px; position: relative;
+                    box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
+            <div>
+                <h3 style="margin: 0 0 10px 0; font-size: 1.5rem; color: #2e3f6b;"><i class="far fa-map" style="margin-right: 10px;"></i>Hospital Locations</h3>
+                <p style="margin: 0; color: #4a90e2; opacity: 0.9;">Interactive map showing hospital locations in Kuala Lumpur area</p>
+                <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                    {% for hospital in hospitals %}
+                    <div style="background: rgba(255,255,255,0.3); 
+                               backdrop-filter: blur(5px);
+                               -webkit-backdrop-filter: blur(5px);
+                               border: 1px solid rgba(255, 255, 255, 0.2);
+                               padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; color: #2e3f6b;">
+                        <i class="far fa-hospital" style="margin-right: 5px;"></i>{{ hospital.name }}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// 選擇醫院
+function selectHospital(name, lat, lng) {
+    selectedHospital = { name, lat, lng };
+    document.getElementById('hospital').value = name;
+    
+    // 高亮選中的醫院卡片
+    document.querySelectorAll('.hospital-card').forEach(card => {
+        card.classList.remove('selected');
+    });
+    
+    document.querySelectorAll('.hospital-card').forEach(card => {
+        if (card.dataset.name === name) {
+            card.classList.add('selected');
+        }
+    });
+    
+    // 顯示成功選擇的提示
+    showNotification(`Selected: ${name}`, 'success');
+}
+
+// 顯示通知
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <span class="notification-icon">${type === 'success' ? '✅' : '❌'}</span>
+            <span class="notification-message">${message}</span>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+    
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
+// 醫院卡片點擊事件
+document.querySelectorAll('.hospital-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const name = this.dataset.name;
+        const lat = parseFloat(this.dataset.lat);
+        const lng = parseFloat(this.dataset.lng);
+        selectHospital(name, lat, lng);
+    });
+});
+
+// 設置最小日期為今天
+document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('appointment_date').setAttribute('min', today);
+    
+    // 初始化地圖
+    initMap();
+});
+
+// 表單驗證
+document.querySelector('.booking-form').addEventListener('submit', function(e) {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const hospital = document.getElementById('hospital').value;
+    const date = document.getElementById('appointment_date').value;
+    const time = document.getElementById('appointment_time').value;
+    
+    if (!name || !phone || !hospital || !date || !time) {
+        e.preventDefault();
+        showNotification('Please fill in all required fields', 'error');
+        return false;
+    }
+    
+    // 驗證電話號碼格式
+    const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+    if (!phoneRegex.test(phone)) {
+        e.preventDefault();
+        showNotification('Please enter a valid phone number', 'error');
+        return false;
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,55 @@
+<div class="content-container">
+    <h2>Health Status Management</h2>
+    <p class="subtitle">Monitor health conditions and wellness indicators</p>
+
+    <form method="GET" id="filter-form">
+        <label>Date:</label>
+        <input type="month" id="monthInput" name="date" value="{% if year and month %}{{ year }}-{{ month }}{% endif %}">
+
+        <button type="button" onclick="applyFilter('health')">Filter</button>
+        <button type="button" onclick="loadPage('health')">Reset</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Person</th>
+                <th>Dark Circles</th>
+                <th>Lip Type</th>
+                <th>Skin Condition</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in healthRecords %}
+            <tr>
+                <td>{{ record.person }}</td>
+                <td>{{ record.dark_circles }}</td>
+                <td>{{ record.lip_type }}</td>
+                <td>{{ record.skin_condition }}</td>
+                <td>
+                    <button onclick="deleteRecord('status', '{{ record.id }}')">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+        <div class="prevbutton">
+            {% if healthRecords.has_previous %}
+            <button onclick="applyFilter('health', 1)">First</button>
+            <button onclick="applyFilter('health', '{{ healthRecords.previous_page_number }}')">Prev</button>
+            {% endif %}
+        </div>
+
+        <div>
+            <span>Page {{ healthRecords.number }} of {{ healthRecords.paginator.num_pages }}</span>
+        </div>
+
+        <div class="nextbutton">
+            {% if healthRecords.has_next %}
+            <button onclick="applyFilter('health', '{{ healthRecords.next_page_number }}')">Next</button>
+            <button onclick="applyFilter('health', '{{ healthRecords.paginator.num_pages }}')">Last</button>
+            {% endif %}
+        </div>
+    </div>
+</div>

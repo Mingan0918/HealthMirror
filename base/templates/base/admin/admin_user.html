@@ -1,0 +1,99 @@
+<div class="content-container">
+    <h2>Users Management</h2>
+    <p class="subtitle">Manage and monitor user accounts</p>
+
+    <form method="GET" id="filter-form">
+        <label>User:</label>
+        <input type="text" name="status" value="{% if user_name %}{{ user_name }}{% else %}{{ '' }}{% endif %}">
+
+        <label>Date:</label>
+        <input type="month" id="monthInput" name="date" value="{% if year and month %}{{ year }}-{{ month }}{% endif %}">
+
+        <button type="button" onclick="applyFilter('user')">Filter</button>
+        <button type="button" onclick="loadPage('user')">Reset</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Admin</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in userRecords %}
+            <tr>
+                <td>{{ user }}</td>
+                <td>{{ user.admin }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.gender }}</td>
+                <td>{{ user.phone }}</td>
+                <td>
+                    <button onclick='openEditModal("user", {
+                                                            "id": "{{ user.id }}",
+                                                            "name": "{{ user }}",
+                                                            "admin": "{{ user.admin }}",
+                                                            "email": "{{ user.email }}",
+                                                            "gender": "{{ user.gender }}",
+                                                            "phone": "{{ user.phone }}"})'>Edit</button>
+                    <button onclick="deleteRecord('user', '{{ user.id }}')">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+        <div class="prevbutton">
+            {% if userRecords.has_previous %}
+            <button onclick="applyFilter('user', 1)">First</button>
+            <button onclick="applyFilter('user', '{{ userRecords.previous_page_number }}')">Prev</button>
+            {% endif %}
+        </div>
+
+        <div>
+            <span>Page {{ userRecords.number }} of {{ userRecords.paginator.num_pages }}</span>
+        </div>
+
+        <div class="nextbutton">
+            {% if userRecords.has_next %}
+            <button onclick="applyFilter('user', '{{ userRecords.next_page_number }}')">Next</button>
+            <button onclick="applyFilter('user', '{{ userRecords.paginator.num_pages }}')">Last</button>
+            {% endif %}
+        </div>
+    </div>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>Edit User</h3>
+            <form id="editForm">
+                {% csrf_token %}
+                <input type="hidden" name="user_id" id="editUserId">
+
+                <label>User Name:</label>
+                <input type="text" name="username" id="editName"><br>
+
+                <label>Admin:</label>
+                <select name="admin" id="editAdmin">
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select><br>
+
+                <label>Email:</label>
+                <input type="email" name="email" id="editEmail"><br>
+
+                <label>Gender:</label>
+                <input type="text" name="gender" id="editGender"><br>
+
+                <label>Phone:</label>
+                <input type="text" name="phone" id="editPhone"><br>
+
+                <button type="submit" onclick="loadPage('user')">Save</button>
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block body_class %}admin-page{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/admin.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="option_bar">
+        <ul>
+            <li onclick="loadPage('user')">Users</li>
+            <li onclick="loadPage('health')">Health Status</li>
+            <li onclick="loadPage('person')">Detected Person</li>
+            <li onclick="loadPage('image')">Detected Image</li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div id="content-area">{% include 'base/admin/adminpage.html' %}</div>
+    </div>
+
+</div>
+
+<script src="{% static 'js/admin.js' %}"></script>
+
+{% endblock content %}

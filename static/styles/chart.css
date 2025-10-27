@@ -1,0 +1,581 @@
+/* ====== 圖表樣式 Chart Styles ====== */
+
+/* 主要圖表容器 */
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    padding: 40px 50px;
+    height: auto;
+    min-height: 550px;
+    border-radius: 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fcfcfc;
+
+    /* 毛玻璃樣式 */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 圖表容器頂部 */
+.chart-container .top {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.chart-container .top h1 {
+    margin: 0;
+    font-size: 2.0rem;
+    color: #2e3f6b;
+    font-weight: 600;
+}
+
+/* 圖表內容區域 */
+.chart-container .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px 40px;
+    gap: 30px;
+    flex: 1;
+}
+
+/* 單個圖表樣式 */
+.content .chart {
+    width: 48%;
+    height: 500px;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 35px;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: visible;
+
+    /* 增強毛玻璃樣式 */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 圖表懸停效果 */
+.content .chart:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 16px 40px rgba(0, 0, 0, 0.15),
+        0 0 30px rgba(255, 255, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.35);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+
+/* Canvas 樣式增強 */
+.content .chart canvas {
+    max-width: 100% !important;
+    max-height: 400px !important;
+    width: auto !important;
+    height: auto !important;
+    filter: 
+        drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))
+        drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 2;
+    border-radius: 50%;
+}
+
+.content .chart:hover canvas {
+    filter: 
+        drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15))
+        drop-shadow(0 0 30px rgba(255, 255, 255, 0.4))
+        drop-shadow(0 0 50px rgba(59, 130, 246, 0.1));
+    transform: scale(1.05) rotateY(5deg);
+}
+
+/* 流動發光邊框動畫 */
+.content .chart::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 24px;
+    background: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.6) 0%,
+        rgba(255, 255, 255, 0.4) 25%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0.4) 75%,
+        rgba(255, 255, 255, 0.6) 100%);
+    background-size: 400% 400%;
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.4s ease;
+    animation: flowingGlow 3s ease-in-out infinite;
+}
+
+.content .chart:hover::before {
+    opacity: 1;
+}
+
+/* 扇形區塊懸停時的特定顏色發光 */
+.content .chart.segment-hover::before {
+    background: radial-gradient(circle, 
+        var(--hover-glow-color, rgba(255, 0, 111, 0.8)) 0%,
+        var(--hover-glow-color, rgba(255, 0, 111, 0.6)) 30%,
+        var(--hover-glow-color, rgba(255, 0, 111, 0.4)) 60%,
+        transparent 100%);
+    background-size: 200% 200%;
+    opacity: 1;
+    animation: segmentGlow 2s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+/* 當鼠標移開時，平滑過渡回白色毛玻璃效果 */
+.content .chart:not(.segment-hover)::before {
+    background: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.6) 0%,
+        rgba(255, 255, 255, 0.4) 25%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0.4) 75%,
+        rgba(255, 255, 255, 0.6) 100%);
+    background-size: 400% 400%;
+    animation: flowingGlow 3s ease-in-out infinite;
+    transition: all 0.4s ease;
+}
+
+/* 扇形發光動畫關鍵幀 */
+@keyframes segmentGlow {
+    0% {
+        background-size: 200% 200%;
+        filter: blur(6px);
+        transform: scale(1);
+    }
+    50% {
+        background-size: 250% 250%;
+        filter: blur(10px);
+        transform: scale(1.02);
+    }
+    100% {
+        background-size: 200% 200%;
+        filter: blur(6px);
+        transform: scale(1);
+    }
+}
+
+/* 流動發光動畫關鍵幀 */
+@keyframes flowingGlow {
+    0% {
+        background-position: 0% 50%;
+        filter: blur(8px);
+    }
+    25% {
+        background-position: 100% 50%;
+        filter: blur(12px);
+    }
+    50% {
+        background-position: 100% 100%;
+        filter: blur(8px);
+    }
+    75% {
+        background-position: 0% 100%;
+        filter: blur(12px);
+    }
+    100% {
+        background-position: 0% 50%;
+        filter: blur(8px);
+    }
+}
+
+/* 移除 donut chart 專用的背景光暈 */
+
+/* 圖表網格佈局 */
+.chart-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+/* 線性圖表容器 */
+.lineChart-container {
+    width: 70%;
+    padding: 50px;
+    border-radius: 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fcfcfc;
+
+    /* 毛玻璃樣式 */
+    background: rgba(255, 255, 255, 0.752);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 5px solid rgba(255, 255, 255, 0.805);
+    box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.lineChart-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 背景波動效果 */
+.lineChart-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, 
+        rgba(255, 255, 255, 0.1) 0%, 
+        rgba(255, 255, 255, 0.05) 30%, 
+        transparent 60%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.lineChart-container.wave-active::before {
+    opacity: 1;
+    animation: backgroundWave 1.5s ease-out;
+}
+
+.lineChart-container::after {
+    display: none;
+}
+
+/* 線圖Canvas增強效果 */
+.lineChart-container canvas {
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 15px;
+}
+
+.lineChart-container:hover canvas {
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.15));
+    transform: scale(1.01);
+}
+
+/* 滑鼠位置響應的擴散效果 */
+.lineChart-container .ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, 
+        rgba(59, 130, 246, 0.3) 0%, 
+        rgba(255, 0, 110, 0.2) 30%, 
+        rgba(59, 130, 246, 0.1) 60%, 
+        transparent 100%);
+    pointer-events: none;
+    transform: scale(0);
+    opacity: 0;
+    z-index: 1;
+    animation: rippleExpand 0.5s ease-out forwards;
+}
+
+/* 背景波動動畫 */
+@keyframes backgroundWave {
+    0% {
+        transform: scale(1);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes rippleExpand {
+    0% {
+        transform: scale(0);
+        opacity: 0.8;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* 線圖數據點動畫增強 */
+.lineChart-container .chartjs-render-monitor {
+    animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 圖表標題樣式 */
+.chart-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2e3f6b;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 圖表說明文字 */
+.chart-description {
+    font-size: 1rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+/* 響應式設計 */
+@media (max-width: 1200px) {
+    .chart-container {
+        width: 85%;
+        padding: 30px 40px;
+    }
+    
+    .content .chart {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .chart-container .content {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .lineChart-container {
+        width: 85%;
+        padding: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .chart-container {
+        width: 95%;
+        padding: 20px 25px;
+        min-height: auto;
+    }
+    
+    .chart-container .top h1 {
+        font-size: 1.6rem;
+    }
+    
+    .content .chart {
+        height: 300px;
+        padding: 15px;
+    }
+    
+    .content .chart canvas {
+        max-height: 250px !important;
+    }
+    
+    .lineChart-container {
+        width: 95%;
+        padding: 25px;
+    }
+    
+    .chart-grid {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* 圖表載入動畫 */
+.chart-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.chart-loading::after {
+    content: '';
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #2e3f6b;
+    border-radius: 50%;
+    animation: chartSpin 1s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes chartSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 圖表錯誤狀態 */
+.chart-error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    color: #e74c3c;
+    text-align: center;
+}
+
+.chart-error-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.chart-error-message {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* 圖表工具提示增強樣式 */
+.chartjs-tooltip {
+    opacity: 1;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    border-radius: 12px;
+    padding: 15px;
+    pointer-events: none;
+    transform: translate(-50%, -100%);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.chartjs-tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid rgba(0, 0, 0, 0.9);
+}
+
+/* ====== 圖例樣式 Legend Styles ====== */
+
+/* 圖例禁用狀態樣式 */
+.legend-disabled {
+    opacity: 0.4 !important;
+    text-decoration: line-through !important;
+    color: rgba(128, 128, 128, 0.6) !important;
+    transition: all 0.3s ease !important;
+    position: relative;
+}
+
+.legend-disabled::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(128, 128, 128, 0.8);
+    transform: translateY(-50%);
+    animation: strikeThrough 0.3s ease-out forwards;
+}
+
+@keyframes strikeThrough {
+    from {
+        width: 0;
+        left: 50%;
+    }
+    to {
+        width: 100%;
+        left: 0;
+    }
+}
+
+/* Chart.js 圖例項目樣式增強 */
+.chartjs-legend li {
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    margin: 4px 0 !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.chartjs-legend li:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    transform: translateX(5px) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.chartjs-legend li:active {
+    transform: translateX(3px) scale(0.98) !important;
+}
+
+/* 圖例項目的點樣式 */
+.chartjs-legend li span {
+    transition: all 0.3s ease !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.legend-disabled span {
+    background: rgba(128, 128, 128, 0.4) !important;
+    border-color: rgba(128, 128, 128, 0.6) !important;
+    box-shadow: none !important;
+}
+
+/* 圖例文字樣式 */
+.chartjs-legend li {
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    color: #333 !important;
+}
+
+.legend-disabled {
+    font-weight: 400 !important;
+    color: rgba(128, 128, 128, 0.6) !important;
+}
+
+/* 圖例容器樣式 */
+.chartjs-legend {
+    padding: 10px !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ====== END CHART STYLES ====== */

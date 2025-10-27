@@ -1,0 +1,51 @@
+<div class="content-container">
+    <h2>Detected Image Management</h2>
+    <p class="subtitle">Browse and manage captured health images</p>
+
+    <form method="GET" id="filter-form">
+        <label>Date:</label>
+        <input type="month" id="monthInput" name="date" value="{% if year and month %}{{ year }}-{{ month }}{% endif %}">
+
+        <button type="button" onclick="applyFilter('image')">Filter</button>
+        <button type="button" onclick="loadPage('image')">Reset</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Image Name</th>
+                <th>Uploaded</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for image in imageRecords %}
+            <tr>
+                <td>{{ image }}</td>
+                <td>{{ image.uploaded }}</td>
+                <td>
+                    <button onclick="deleteRecord('image', '{{ image.id }}')">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+        <div class="prevbutton">
+            {% if imageRecords.has_previous %}
+            <button onclick="applyFilter('image', 1)">First</button>
+            <button onclick="applyFilter('image', '{{ imageRecords.previous_page_number }}')">Prev</button>
+            {% endif %}
+        </div>
+
+        <div>
+            <span>Page {{ imageRecords.number }} of {{ imageRecords.paginator.num_pages }}</span>
+        </div>
+
+        <div class="nextbutton">
+            {% if imageRecords.has_next %}
+            <button onclick="applyFilter('image', '{{ imageRecords.next_page_number }}')">Next</button>
+            <button onclick="applyFilter('image', '{{ imageRecords.paginator.num_pages }}')">Last</button>
+            {% endif %}
+        </div>
+    </div>
+</div>

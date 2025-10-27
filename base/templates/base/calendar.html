@@ -1,0 +1,90 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-calendar">
+
+    <div class="calendar">
+        <div class="header">
+            <button id="prev">
+                <i><</i>
+            </button>
+            <div class="monthYear" id="monthYear"></div>
+            <button id="next">
+                <i>></i>
+            </button>
+        </div>
+        <div class="days">
+            <div class="day">Mon</div>
+            <div class="day">Tue</div>
+            <div class="day">Wed</div>
+            <div class="day">Thu</div>
+            <div class="day">Fri</div>
+            <div class="day">Sat</div>
+            <div class="day">Sun</div>
+        </div>
+        <div class="dates" id="dates"></div>
+    </div>
+
+    <div class="alert">
+            <div class="month">JAN</div>
+            <div class="month">FEB</div>
+            <div class="month">MAR</div>
+            <div class="month">APR</div>
+            <div class="month">MAY</div>
+            <div class="month">JUN</div>
+            <div class="month">JUL</div>
+            <div class="month">AUG</div>
+            <div class="month">SEP</div>
+            <div class="month">OCT</div>
+            <div class="month">NOV</div>
+            <div class="month">DEC</div>
+    </div>
+    <select id="thresholdSelector">
+        <option value="0.25">25%</option>
+        <option value="0.5">50%</option>
+        <option value="0.8">80%</option>
+    </select>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const monthDivs = document.querySelectorAll('.alert .month');
+    const thresholdSelect = document.getElementById('thresholdSelector');
+
+    async function updateAlertColors(threshold) {
+        const response = await fetch('/api/monthly-hat-alerts/');
+        const data ={
+                        6: 0.5, 
+                        5: 0.2,
+                        1: 0.8,
+                        7: 0.3
+                    };
+        // await response.json();  // { "1": 0.1, "2": 0.6, "6": 0.5, ... }
+
+        monthDivs.forEach((div, index) => {
+            const monthIndex = index + 1;
+            const ratio = data[monthIndex] || 0;
+
+            if (ratio >= threshold) {
+                div.classList.add('alert-danger'); 
+            } else {
+                div.classList.remove('alert-danger');
+            }
+        });
+    }
+
+    updateAlertColors(parseFloat(thresholdSelect.value));
+
+    // update when user change selection
+    thresholdSelect.addEventListener('change', () => {
+        const selectedThreshold = parseFloat(thresholdSelect.value);
+        updateAlertColors(selectedThreshold);
+    });
+});
+</script>
+
+<script src="{% static 'js/calendar.js' %}"></script>
+
+{% endblock content %}

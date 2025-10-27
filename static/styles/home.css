@@ -1,0 +1,2033 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ====== 首頁背景設定 ====== */
+body.home {
+    background: url("/static/images/BackgroundHome.svg") no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* ====== 主容器 ====== */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* ====== 首頁主橫幅區 ====== */
+.main-banner {
+    width: 100vw;
+    min-height: 320px;
+    background: linear-gradient(90deg, #e3ecfa 0%, #f5f7fa 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 40px;
+}
+.banner-content {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.banner-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+.banner-text {
+    position: relative;
+    z-index: 1;
+    padding: 60px 40px;
+    text-align: center;
+}
+.banner-text h1 {
+    font-size: 2.8rem;
+    color: #2e3f6b;
+    margin-bottom: 10px;
+}
+.banner-text p {
+    font-size: 1.2rem;
+    color: #4a90e2;
+    margin-bottom: 20px;
+}
+.main-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    background: #4a90e2;
+    color: #fff;
+    border-radius: 24px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.main-btn:hover {
+    background: #2e3f6b;
+}
+
+/* ====== 區塊標題 ====== */
+.section-header {
+    width: 70%;
+    margin: 0 auto 20px auto;
+    text-align: left;
+    padding-left: 10px;
+}
+
+/* ====== 即時監控區 ====== */
+.box-detection {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    gap: 10px;
+    padding: 50px;
+    border-radius: 40px;
+    position: relative;
+    overflow: hidden;
+
+    /* ✅ 毛玻璃樣式 */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
+}
+
+.detect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    height: 650px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+}
+.detect .image {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: self-end;
+    text-align: center;
+    width: 300px;
+    height: 625px;
+    padding: 15px;
+
+    /* ✅ 毛玻璃樣式 */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    border-radius: 15px;
+    box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.info .top {
+    flex-shrink: 0;
+    padding: 10px 0 15px 0;
+    border-bottom: 2px solid #f0f0f0;
+    margin-bottom: 10px;
+}
+
+.info .top p {
+    margin: 0 0 8px 0;
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.info .top h3 {
+    margin: 2px 0;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.info .info-content {
+    flex: 1;
+    padding: 12px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    min-height: 0;
+}
+
+.info .info-content:last-child {
+    border-bottom: none;
+}
+
+.info .info-content h2 {
+    margin: 0 0 5px 0;
+    font-size: 0.95rem;
+    color: #000000;
+    font-weight: 600;
+}
+
+.info .info-content h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #000000;
+    font-weight: 700;
+}
+
+/* ====== 可擴充：日曆區樣式可補充在此 ====== */
+/* 若你有 calendar, .container-calendar 等樣式需求，可提供繼續整理 */
+
+/* ====== 日曆區樣式 ====== */
+.container-calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    padding: 50px;
+    min-height: 550px;
+    border-radius: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* border: 1px solid rgba(255, 255, 255, 0.2); */
+    box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.container-calendar .top {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.container-calendar .top h1 {
+    margin: 0;
+    font-size: 2.0rem;
+    color: #2e3f6b;
+    font-weight: 600;
+}
+
+.container-calendar .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* ✅ 讓三個區塊平行對齊 */
+    width: 100%;
+    padding: 20px 40px;
+    gap: 30px;
+    flex: 5;
+}
+
+/* 左側：百分比統計區 */
+.calendar-stats {
+    width: 32%;
+    min-height: 505px;
+    /* max-height: 505px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 40px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: visible;
+
+    /* ✅ 內層毛玻璃樣式 - 與圖表一致 */
+    background: rgba(255, 255, 255, 0.853);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* border: 1px solid rgba(255, 255, 255, 0.773); */
+    box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-stats h3 {
+    margin: 0 0 20px 0;
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* 確保內容在光效之上 */
+.calendar-stats > *,
+.calendar > *,
+.date-details > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* 統計圓圈容器 */
+.stats-circle {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    overflow: visible;
+}
+
+/* 日曆內容 */
+.calendar .header,
+.calendar .month-selector,
+.calendar .days,
+.calendar .dates {
+    position: relative;
+    z-index: 2;
+}
+
+.stats-circle svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.bg-circle {
+    fill: none;
+    stroke: rgba(200, 200, 200, 0.3);
+    stroke-width: 16;
+}
+
+.progress-circle {
+    fill: none;
+    stroke: #4CAF50;
+    stroke-width: 18;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.5s ease, stroke-dashoffset 0.5s ease;
+    
+    /* 添加多重動畫效果 */
+    animation: 
+        circlePulse 3s ease-in-out infinite,
+        circleRotate 8s linear infinite;
+    transform-origin: center;
+}
+
+/* 圓圈光暈動畫 - 只在懸停時顯示 */
+@keyframes circleGlow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 5px rgba(76, 175, 80, 0.2));
+    }
+    50% { 
+        filter: drop-shadow(0 0 15px rgba(76, 175, 80, 0.5));
+    }
+}
+
+/* 圓圈脈衝動畫 - 點點到填滿效果 */
+@keyframes circlePulse {
+    0% {
+        stroke-width: 18;
+        stroke-dasharray: 2 28;
+        opacity: 0.6;
+    }
+    25% {
+        stroke-width: 20;
+        stroke-dasharray: 3 25;
+        opacity: 0.75;
+    }
+    50% {
+        stroke-width: 22;
+        stroke-dasharray: 5 20;
+        opacity: 0.9;
+    }
+    75% {
+        stroke-width: 24;
+        stroke-dasharray: 7 16;
+        opacity: 1;
+    }
+    100% {
+        stroke-width: 18;
+        stroke-dasharray: 2 28;
+        opacity: 0.6;
+    }
+}
+
+
+/* 旋轉動畫 */
+@keyframes circleRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.stats-circle:hover .progress-circle {
+    stroke-width: 20;
+    filter: drop-shadow(0 0 10px rgba(76, 175, 80, 0.8));
+}
+
+/* 波浪效果動畫 */
+@keyframes circleWave {
+    0%, 100% { 
+        stroke-dasharray: none;
+    }
+    25% { 
+        stroke-dasharray: 5 5;
+    }
+    50% { 
+        stroke-dasharray: 10 2;
+    }
+    75% { 
+        stroke-dasharray: 3 7;
+    }
+}
+
+.stats-percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+}
+
+.stats-label {
+    color: #666;
+    font-size: 14px;
+    text-align: center;
+    margin: 10px 0 0 0;
+}
+
+/* 中間：日曆區 */
+.calendar {
+    width: 35%;
+    height: 500px;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 40px;
+    padding: 30px;
+    margin-top: 0px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    
+    /* ✅ 內層毛玻璃樣式 - 與圖表一致 */
+    background: rgba(255, 255, 255, 0.853);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(10px);
+    /* border: 1px solid rgba(255, 255, 255, 0.773); */
+    box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 右側：日期詳情區域 */
+.date-details {
+    width: 32%;
+    height: 505px;
+    max-height: 505px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 40px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow-y: auto;
+
+    /* ✅ 內層毛玻璃樣式 - 與圖表一致 */
+    background: rgba(255, 255, 255, 0.853);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* border: 1px solid rgba(255, 255, 255, 0.773); */
+    box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* 主要卡片的毛玻璃效果 */
+.calendar-stats,
+.calendar,
+.date-details {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* border: 1px solid rgba(255, 255, 255, 0.18); */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* 跟隨鼠標的光效 */
+.calendar-stats::after,
+.calendar::after,
+.date-details::after {
+    content: '';
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.5) 30%, transparent 60%);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    left: var(--mouse-x, 50%);
+    top: var(--mouse-y, 50%);
+    transform: translate(-50%, -50%);
+}
+
+/* 鼠標進入卡片時顯示光效 */
+.calendar-stats:hover::after,
+.calendar:hover::after,
+.date-details:hover::after {
+    opacity: 1;
+}
+
+/* 光效動畫 */
+.calendar-stats::before,
+.calendar::before,
+.date-details::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.1), 
+        transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+    z-index: 1;
+}
+
+/* 鼠標懸停效果 */
+.calendar-stats:hover,
+.calendar:hover,
+.date-details:hover {
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
+    transform: translateY(-5px);
+}
+
+.calendar-stats:hover::before,
+.calendar:hover::before,
+.date-details:hover::before {
+    opacity: 1;
+    animation: lightSweep 1.5s ease-in-out;
+}
+
+@keyframes lightSweep {
+    0% { 
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+        opacity: 0;
+    }
+    50% { 
+        opacity: 1;
+    }
+    100% { 
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+.date-details h3 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.calendar .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 0 5px;
+}
+
+.calendar .header button {
+    background: rgba(74, 144, 226, 0.1);
+    border: 2px solid rgba(74, 144, 226, 0.3);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #4a90e2;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.calendar .header button:hover {
+    background: rgba(74, 144, 226, 0.2);
+    border-color: #4a90e2;
+    transform: scale(1.05);
+}
+
+.calendar .monthYear {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2e3f6b;
+    text-align: center;
+    flex: 1;
+}
+
+/* 月份選擇下拉選單 */
+.month-selector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.month-selector select {
+    padding: 6px 12px;
+    border-radius: 15px;
+    border: 2px solid rgba(74, 144, 226, 0.3);
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #2e3f6b;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.month-selector select:hover {
+    border-color: #4a90e2;
+    background: rgba(255, 255, 255, 1);
+}
+
+.calendar .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 10px;
+}
+
+.calendar .day {
+    text-align: center;
+    font-weight: 600;
+    color: #666;
+    font-size: 0.7rem;
+    padding: 6px 0;
+    background: rgba(74, 144, 226, 0.05);
+    border-radius: 4px;
+}
+
+.calendar .dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    flex: 1;
+}
+
+.calendar .dates div {
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.calendar .dates div:hover {
+    background: rgba(74, 144, 226, 0.1);
+    transform: scale(1.05);
+}
+
+.calendar .dates .today {
+    background: #4a90e2;
+    color: white;
+    font-weight: 600;
+}
+
+.calendar .dates .danger {
+    background: #ff6b6b;
+    color: white;
+    font-weight: 600;
+}
+
+.calendar .dates .selected {
+    background: #3742fa;
+    color: white;
+    border: 2px solid #2f3542;
+}
+
+.calendar .dates div:not(.inactive) {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.calendar .dates div:not(.inactive)::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.4s ease;
+    z-index: 1;
+}
+
+.calendar .dates div:not(.inactive):hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.calendar .dates div:not(.inactive):hover::before {
+    width: 100%;
+    height: 100%;
+    animation: rippleEffect 0.6s ease-out;
+}
+
+@keyframes rippleEffect {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 120%;
+        height: 120%;
+        opacity: 0;
+    }
+}
+
+.calendar .dates .inactive {
+    color: #ccc;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 健康統計樣式 */
+.health-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    padding: 10px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    min-height: 50px;
+}
+
+.stat-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.stat-item:hover::before {
+    left: 100%;
+}
+
+.stat-item {
+    position: relative;
+    padding-left: 20px; /* 給 ::before 留空間 */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* ✨ 精美的左邊彩色毛玻璃條 */
+.stat-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 8px;
+    height: 100%;
+    border-radius: 6px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    animation: slideUp 0.8s ease-out forwards;
+}
+
+/* ✨ 懸停效果 */
+.stat-item:hover::before {
+    width: 12px;
+    box-shadow: 
+        0 0 30px rgba(255, 255, 255, 0.5),
+        0 0 60px var(--glow-color, rgba(255, 255, 255, 0.3)),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    transform: scaleY(1.05);
+}
+
+/* ✨ 滑入動畫 */
+@keyframes slideUp {
+    0% {
+        transform: scaleY(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+/* ✨ 漸變色彩條 - With Hat (綠色系) */
+.stat-item:nth-child(1)::before {
+    background: linear-gradient(135deg, 
+        rgba(40, 167, 69, 0.8) 0%,
+        rgba(72, 199, 116, 0.9) 50%,
+        rgba(104, 231, 163, 0.7) 100%);
+    --glow-color: rgba(40, 167, 69, 0.6);
+    animation-delay: 0.1s;
+}
+
+/* ✨ 漸變色彩條 - No Hat (紅色系) */
+.stat-item:nth-child(2)::before {
+    background: linear-gradient(135deg, 
+        rgba(220, 53, 69, 0.8) 0%,
+        rgba(255, 99, 132, 0.9) 50%,
+        rgba(255, 159, 164, 0.7) 100%);
+    --glow-color: rgba(220, 53, 69, 0.6);
+    animation-delay: 0.2s;
+}
+
+/* ✨ 漸變色彩條 - With Vest (藍色系) */
+.stat-item:nth-child(3)::before {
+    background: linear-gradient(135deg, 
+        rgba(0, 123, 255, 0.8) 0%,
+        rgba(54, 162, 235, 0.9) 50%,
+        rgba(153, 202, 255, 0.7) 100%);
+    --glow-color: rgba(0, 123, 255, 0.6);
+    animation-delay: 0.3s;
+}
+
+/* ✨ 漸變色彩條 - No Vest (橙色系) */
+.stat-item:nth-child(4)::before {
+    background: linear-gradient(135deg, 
+        rgba(253, 126, 20, 0.8) 0%,
+        rgba(255, 159, 64, 0.9) 50%,
+        rgba(255, 206, 84, 0.7) 100%);
+    --glow-color: rgba(253, 126, 20, 0.6);
+    animation-delay: 0.4s;
+}
+
+/* ✨ 脈衝光效動畫 */
+.stat-item::after {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 50%;
+    width: 4px;
+    height: 20%;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 2px;
+    transform: translateY(-50%);
+    opacity: 0;
+    animation: pulse 2s ease-in-out infinite;
+    animation-delay: var(--pulse-delay, 1s);
+}
+
+.stat-item:nth-child(1)::after { --pulse-delay: 0s; }
+.stat-item:nth-child(2)::after { --pulse-delay: 0.5s; }
+.stat-item:nth-child(3)::after { --pulse-delay: 1s; }
+.stat-item:nth-child(4)::after { --pulse-delay: 1.5s; }
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0;
+        transform: translateY(-50%) scaleY(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-50%) scaleY(1);
+    }
+}
+
+
+.stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.stat-label {
+    font-weight: 600;
+    color: #333;
+    font-size: 12px;
+    line-height: 1.2;
+}
+
+.stat-count {
+    font-weight: 700;
+    color: #2c3e50;
+    font-size: 16px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    animation: numberPulse 2s ease-in-out infinite;
+    line-height: 1;
+}
+
+.stat-item:hover .stat-count {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+@keyframes numberPulse {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% { 
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background-color: #e9ecef;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    width: 0%;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        transparent 25%, 
+        rgba(255,255,255,0.3) 25%, 
+        rgba(255,255,255,0.3) 50%, 
+        transparent 50%, 
+        transparent 75%, 
+        rgba(255,255,255,0.3) 75%);
+    background-size: 20px 20px;
+    animation: progressStripes 1s linear infinite;
+}
+
+@keyframes progressStripes {
+    0% { background-position: 0 0; }
+    100% { background-position: 20px 0; }
+}
+
+/* 不同進度條的顏色 */
+.dark-circles-none-progress {
+    background: linear-gradient(90deg, #28a745, #20c997, #17a2b8, #6f42c1);
+    background-size: 200% 100%;
+    animation: gradientShift 3s ease infinite;
+}
+
+.dark-circles-issues-progress {
+    background: linear-gradient(90deg, #dc3545, #e74c3c, #fd7e14, #ffc107);
+    background-size: 200% 100%;
+    animation: gradientShift 3s ease infinite;
+}
+
+.lip-normal-progress {
+    background: linear-gradient(90deg, #007bff, #17a2b8, #20c997, #28a745);
+    background-size: 200% 100%;
+    animation: gradientShift 3s ease infinite;
+}
+
+.lip-issues-progress {
+    background: linear-gradient(90deg, #fd7e14, #ffc107, #ffeb3b, #cddc39);
+    background-size: 200% 100%;
+    animation: gradientShift 3s ease infinite;
+}
+
+.skin-healthy-progress {
+    background: linear-gradient(90deg, #28a745, #20c997, #17a2b8, #6f42c1);
+    background-size: 200% 100%;
+    animation: gradientShift 3s ease infinite;
+}
+
+.skin-issues-progress {
+    background: linear-gradient(90deg, #dc3545, #e74c3c, #fd7e14, #ffc107);
+    background-size: 200% 100%;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.label-good {
+    color: #22c55e;
+    font-weight: 600;
+}
+
+.label-poor {
+    color: #ef4444;
+    font-weight: 600;
+}
+
+/* 日曆日期點擊效果 */
+.calendar .dates div {
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.calendar .dates div:hover {
+    background: rgba(74, 144, 226, 0.1);
+    transform: scale(1.05);
+}
+
+.calendar .dates div.selected {
+    background: #3b82f6;
+    color: white;
+    font-weight: bold;
+}
+
+/* 隱藏舊的元素 */
+.alert {
+    display: none;
+}
+
+#thresholdSelector {
+    display: none;
+}
+
+.threshold-selector {
+    display: none;
+}
+
+.threshold-options {
+    display: none;
+}
+
+.threshold-option {
+    display: none;
+}
+
+/* 選中日期樣式 */
+.selected-date {
+    background: linear-gradient(135deg, #667eea 0%, #afc6dd 100%);
+    padding: 10px 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    animation: selectedDateGlow 3s ease-in-out infinite;
+    flex-shrink: 0;
+    height: auto;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    /* ✅ 毛玻璃效果 */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+}
+
+.selected-date:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #5a6fd8 0%, #9bb5d1 100%);
+}
+
+.selected-date::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: rotate(45deg);
+    animation: selectedDateShine 4s linear infinite;
+}
+
+.selected-date span {
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 1;
+    line-height: 1.3;
+    letter-spacing: 0.5px;
+}
+
+@keyframes selectedDateGlow {
+    0%, 100% { 
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+    50% { 
+        box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
+    }
+}
+
+@keyframes selectedDateShine {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* Detection Control Section */
+.detection-control {
+    width: 77%;
+    margin-top: -50px; /* 向上移動，減少與上方區域的間距 */
+}
+
+.control-content {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.control-content:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.control-content h3 {
+    margin: 0 0 20px 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #2e3f6b 0%, #4a90e2 25%, #667eea 50%, #4a90e2 75%, #2e3f6b 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: shimmer 3s linear infinite;
+}
+
+.control-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.detection-btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.detection-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    transition: all 0.6s ease;
+    z-index: 1;
+}
+
+.detection-btn:hover::before {
+    left: 100%;
+    animation: lightSweep 1.8s ease-in-out;
+}
+
+.detection-btn.primary {
+    background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.25) 0%, 
+                rgba(255, 255, 255, 0.15) 50%,
+                rgba(255, 255, 255, 0.25) 100%);
+    color: #2e3f6b;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.detection-btn.primary:hover {
+    background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.4) 0%, 
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0.4) 100%);
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3),
+                0 0 40px rgba(255, 255, 255, 0.4),
+                0 0 80px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #1a2b4a;
+}
+
+.detection-btn.secondary {
+    background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.25) 0%, 
+                rgba(255, 255, 255, 0.15) 50%,
+                rgba(255, 255, 255, 0.25) 100%);
+    color: #2e3f6b;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.detection-btn.secondary:hover {
+    background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.4) 0%, 
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0.4) 100%);
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3),
+                0 0 40px rgba(255, 255, 255, 0.4),
+                0 0 80px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #1a2b4a;
+}
+
+.detection-btn.upload {
+    background: linear-gradient(135deg, 
+                rgba(40, 167, 69, 0.25) 0%, 
+                rgba(40, 167, 69, 0.15) 50%,
+                rgba(40, 167, 69, 0.25) 100%);
+    color: #155724;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.detection-btn.upload:hover {
+    background: linear-gradient(135deg, 
+                rgba(40, 167, 69, 0.4) 0%, 
+                rgba(40, 167, 69, 0.3) 50%,
+                rgba(40, 167, 69, 0.4) 100%);
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 15px 40px rgba(40, 167, 69, 0.3),
+                0 0 40px rgba(40, 167, 69, 0.4),
+                0 0 80px rgba(40, 167, 69, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #0f3d1a;
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+    z-index: 2;
+    position: relative;
+}
+
+.btn-gif {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    z-index: 2;
+    position: relative;
+}
+
+.btn-text {
+    z-index: 2;
+    position: relative;
+}
+
+/* Detection Placeholder Styles */
+.detection-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.15) 0%, 
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0.15) 100%);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.detection-placeholder:hover {
+    background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.2) 0%, 
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0.2) 100%);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.placeholder-content {
+    text-align: center;
+    color: #2e3f6b;
+}
+
+.placeholder-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    opacity: 0.7;
+    animation: breathe 2s ease-in-out infinite;
+}
+
+.placeholder-content h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.placeholder-content p {
+    margin: 0;
+    font-size: 1rem;
+    opacity: 0.8;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Animation for placeholder icon */
+@keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+/* Light sweep animation */
+@keyframes lightSweep {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+}
+
+/* ===== END CHART STYLES ===== */
+
+/* ===== CONFIRM DIALOG STYLES ===== */
+.confirm-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10002;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.confirm-dialog.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.confirm-dialog-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 16px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15),
+                0 4px 16px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 420px;
+    width: 90%;
+    transform: scale(0.9) translateY(20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.confirm-dialog.show .confirm-dialog-content {
+    transform: scale(1) translateY(0);
+}
+
+.confirm-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+}
+
+.confirm-message {
+    color: #2e3f6b;
+    font-size: 1.1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.confirm-question {
+    color: #5a6c7d;
+    font-size: 1rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.confirm-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.confirm-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+.cancel-btn {
+    background: rgba(108, 117, 125, 0.1);
+    color: #6c757d;
+    border: 2px solid rgba(108, 117, 125, 0.3);
+}
+
+.cancel-btn:hover {
+    background: rgba(108, 117, 125, 0.2);
+    border-color: rgba(108, 117, 125, 0.5);
+    transform: translateY(-1px);
+}
+
+.ok-btn {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.ok-btn:hover {
+    background: linear-gradient(135deg, #0056b3, #004085);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* ===== END CONFIRM DIALOG STYLES ===== */
+
+/* ===== NOTIFICATION STYLES ===== */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+                0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 10000;
+    transform: translateX(400px);
+    animation: slideIn 0.3s ease-out forwards;
+    max-width: 350px;
+}
+
+.notification.error {
+    background: rgba(248, 215, 218, 0.95);
+    border-color: rgba(220, 53, 69, 0.3);
+    color: #721c24;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.notification-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.notification-message {
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.notification.fade-out {
+    animation: slideOut 0.3s ease-in forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+
+/* ===== SUCCESS MODAL STYLES ===== */
+.success-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.success-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.success-modal-content {
+    background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.95) 0%, 
+                rgba(255, 255, 255, 0.9) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2),
+                0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 400px;
+    width: 90%;
+    transform: scale(0.8) translateY(20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.success-modal.show .success-modal-content {
+    transform: scale(1) translateY(0);
+}
+
+.success-animation {
+    margin-bottom: 20px;
+}
+
+.checkmark-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: scaleIn 0.5s ease-out 0.2s both;
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+}
+
+.checkmark {
+    width: 30px;
+    height: 15px;
+    border: 3px solid white;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+    animation: checkmarkDraw 0.3s ease-out 0.7s both;
+}
+
+.success-modal h3 {
+    color: #2e3f6b;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.success-modal p {
+    color: #5a6c7d;
+    font-size: 1.1rem;
+    margin: 0 0 10px 0;
+    line-height: 1.5;
+}
+
+.success-modal .filename {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-style: italic;
+    margin-bottom: 25px;
+    padding: 8px 12px;
+    background: rgba(108, 117, 125, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(108, 117, 125, 0.2);
+}
+
+.success-btn {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.success-btn:hover {
+    background: linear-gradient(135deg, #218838, #1ea085);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes checkmarkDraw {
+    from {
+        width: 0;
+        height: 0;
+    }
+    to {
+        width: 30px;
+        height: 15px;
+    }
+}
+
+/* ===== END NOTIFICATION & MODAL STYLES ===== */
+
+/* ===== SCROLL ANIMATION STYLES ===== */
+/* Scroll Animation Styles */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-animate.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Fade In Up Animation */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fade-in-up.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Slide In Left Animation */
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-80px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.slide-in-left.animate {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Slide In Right Animation */
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(80px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.slide-in-right.animate {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Scale In Animation */
+.scale-in {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scale-in.animate {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Parallax Effect for Hero Section */
+.box-detection {
+    position: relative;
+    overflow: hidden;
+}
+
+.box-detection::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, 
+        rgba(74, 144, 226, 0.05) 0%, 
+        rgba(80, 227, 194, 0.05) 50%, 
+        rgba(74, 144, 226, 0.05) 100%);
+    animation: parallaxFloat 20s ease-in-out infinite;
+    z-index: -1;
+}
+
+/* Keyframes for animations */
+@keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes lightSweep {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes parallaxFloat {
+    0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+    50% { transform: translate(-48%, -52%) rotate(1deg); }
+}
+
+@keyframes shimmerProgress {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Enhanced Chart Animations */
+.chart-container .chart {
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.chart-container .chart:hover {
+    transform: translateY(-10px) scale(1.02);
+}
+
+.chart-container .chart.animate {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Calendar Stats Enhanced Animation */
+.calendar-stats .stats-circle {
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.calendar-stats:hover .stats-circle {
+    transform: scale(1.05) rotate(5deg);
+}
+
+.calendar-stats.animate {
+    transform: translateY(0);
+    opacity: 1;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Progress Bar Animation Enhancement */
+.stat-item .progress-fill {
+    transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-item .progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.4), 
+        transparent);
+    animation: shimmerProgress 1.5s ease-in-out infinite;
+}
+
+/* Stagger Animation Delays */
+.scroll-animate[data-delay="200"] { transition-delay: 0.1s; }
+.scroll-animate[data-delay="400"] { transition-delay: 0.2s; }
+.scroll-animate[data-delay="600"] { transition-delay: 0.3s; }
+.scroll-animate[data-delay="800"] { transition-delay: 0.4s; }
+.scroll-animate[data-delay="1000"] { transition-delay: 0.5s; }
+.scroll-animate[data-delay="1200"] { transition-delay: 0.6s; }
+.scroll-animate[data-delay="1400"] { transition-delay: 0.7s; }
+.scroll-animate[data-delay="1600"] { transition-delay: 0.8s; }
+
+/* Smooth Scroll Behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Enhanced Detection Control Animation */
+.detection-control {
+    position: relative;
+    overflow: hidden;
+}
+
+.detection-control::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(74, 144, 226, 0.1), 
+        transparent);
+    transition: left 0.8s ease-in-out;
+}
+
+.detection-control.animate::before {
+    left: 100%;
+}
+
+/* Button Hover Enhancements */
+.detection-btn {
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+.detection-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.detection-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Calendar Animation Enhancements */
+.calendar .dates .date {
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.calendar .dates .date:hover {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #4a90e2, #50e3c2);
+    color: white;
+    box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
+}
+
+/* Line Chart Container Animation */
+.lineChart-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.lineChart-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        rgba(74, 144, 226, 0.05), 
+        rgba(80, 227, 194, 0.05));
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+}
+
+.lineChart-container.animate::after {
+    opacity: 1;
+}
+
+/* Responsive Animation Adjustments */
+@media (max-width: 768px) {
+    .scroll-animate {
+        transform: translateY(30px);
+    }
+    
+    .slide-in-left {
+        transform: translateX(-40px);
+    }
+    
+    .slide-in-right {
+        transform: translateX(40px);
+    }
+    
+    .scroll-animate[data-delay] {
+        transition-delay: 0s;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .scroll-animate,
+    .fade-in-up,
+    .slide-in-left,
+    .slide-in-right,
+    .scale-in {
+        transition: none;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .parallaxFloat,
+    .shimmerProgress {
+        animation: none;
+    }
+}
+
+/* ===== END SCROLL ANIMATION STYLES ===== */

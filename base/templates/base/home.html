@@ -1,0 +1,246 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block body_class %}home{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/chart.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="box-detection scroll-animate fade-in-up">
+        <div class="detect">
+            <div class="detection-placeholder" id="detectionPlaceholder">
+                <div class="placeholder-content">
+                    <div class="placeholder-icon">📷</div>
+                    <h3>Camera Detection</h3>
+                    <p>Click "Start Detection" to begin monitoring</p>
+                </div>
+            </div>
+            <img class="image" id="detected" src="{% url 'detected_image' %}" alt="" style="display: none;">
+        </div>
+
+        <div class="info">
+            <div class="top">
+                <p id="clock"></p>
+                <h3>Person Name:</h3><h3 id="person"></h3>
+            </div>
+
+            <div class="info-content">
+                <h2>Dark Circles:</h2>
+                <h3 id="dark_circles">-</h3>
+            </div>
+
+            <div class="info-content">
+                <h2>Lip Type:</h2>
+                <h3 id="lip_type">-</h3>
+            </div>
+
+            <div class="info-content">
+                <h2>Skin Condition:</h2>
+                <h3 id="skin_condition">-</h3>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Detection Control Section -->
+    <div class="detection-control scroll-animate fade-in-up" data-delay="300">
+        <div class="control-content">
+            <h3>Detection Control</h3>
+            <div class="control-actions">
+                <button id="startDetectionBtn" class="detection-btn primary" onclick="startDetection()">
+                    <span class="btn-icon"><img src="{% static 'images/Play.gif' %}" alt="Play" class="btn-gif"></span>
+                    <span class="btn-text">Start Detection</span>
+                </button>
+                <button id="stopDetectionBtn" class="detection-btn secondary" onclick="stopDetection()" style="display: none;">
+                    <span class="btn-icon"><img src="{% static 'images/Play.gif' %}" alt="Stop" class="btn-gif"></span>
+                    <span class="btn-text">Stop Detection</span>
+                </button>
+                <button id="uploadPhotoBtn" class="detection-btn upload" onclick="triggerFileUpload()">
+                    <span class="btn-icon"><img src="{% static 'images/Upload.gif' %}" alt="Upload" class="btn-gif"></span>
+                    <span class="btn-text">Upload Photo</span>
+                </button>
+                <input type="file" id="photoUpload" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-container scroll-animate fade-in-up" data-delay="600">
+        <div class="top">
+            <h1>Monthly Chart</h1>
+        </div>
+        <div class="content">
+            <div class="chart scroll-animate slide-in-left" data-delay="900">
+                <canvas id="donutChart"></canvas>     
+            </div>     
+            <div class="chart scroll-animate slide-in-right" data-delay="1200">   
+                <canvas id="donutChart2"></canvas>   
+            </div> 
+        </div>       
+    </div>
+
+    <div class="lineChart-container scroll-animate fade-in-up" data-delay="1300">
+        <canvas id="skinLineChart" width="200px" height="100px"></canvas>
+    </div>
+
+    <div class="lineChart-container scroll-animate fade-in-up" data-delay="1500">
+        <canvas id="lineChart" width="200px" height="100px"></canvas>
+    </div>
+
+    <div class="container-calendar scroll-animate fade-in-up" data-delay="300">
+        <div class="top">
+            <h1>Health Calendar Dashboard</h1>
+        </div>
+        <div class="content">
+            <!-- 左側：百分比統計 -->
+            <div class="calendar-stats scroll-animate slide-in-left" data-delay="600">
+                <h3>Health Status</h3>
+                <div class="stats-circle">
+                    <svg viewBox="0 0 280 280">
+                        <circle class="bg-circle" cx="140" cy="140" r="130"></circle>
+                        <circle class="progress-circle" cx="140" cy="140" r="130" 
+                                stroke-dasharray="0 816" id="progressCircle"></circle>
+                    </svg>
+                    <div class="stats-percentage" id="statsPercentage">100%</div>
+                </div>
+                <div class="stats-label" id="statsLabel">This Month</div>
+            </div>
+
+            <!-- 中間：日曆 -->
+            <div class="calendar scroll-animate fade-in-up" data-delay="900">
+                <div class="header">
+                    <button id="prev"><i><</i></button>
+                    <div class="monthYear" id="monthYear"></div>
+                    <button id="next"><i>></i></button>
+                </div>
+                
+                <!-- 月份選擇下拉選單 -->
+                <div class="month-selector">
+                    <select id="monthSelector">
+                        <option value="0">January</option>
+                        <option value="1">February</option>
+                        <option value="2">March</option>
+                        <option value="3">April</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">August</option>
+                        <option value="8">September</option>
+                        <option value="9">October</option>
+                        <option value="10">November</option>
+                        <option value="11">December</option>
+                    </select>
+                </div>
+                
+                <div class="days">
+                    <div class="day">Mon</div>
+                    <div class="day">Tue</div>
+                    <div class="day">Wed</div>
+                    <div class="day">Thu</div>
+                    <div class="day">Fri</div>
+                    <div class="day">Sat</div>
+                    <div class="day">Sun</div>
+                </div>
+                <div class="dates" id="dates"></div>
+            </div>
+
+            <!-- 右側：日期詳情 -->
+            <div class="date-details scroll-animate slide-in-right" data-delay="1200">
+                <h3>Daily Details</h3>
+                <div class="selected-date">
+                    <span id="selectedDate">Select a Date</span>
+                </div>
+                
+                <div class="health-stats">
+                    <div class="stat-item scroll-animate fade-in-up" data-delay="1500">
+                        <div class="stat-header">
+                            <span class="stat-label">Dark Circles (None)</span>
+                            <span class="stat-count" id="darkCirclesNoneCount">0</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill dark-circles-none-progress" id="darkCirclesNoneProgress"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-item scroll-animate fade-in-up" data-delay="1800">
+                        <div class="stat-header">
+                            <span class="stat-label">Dark Circles (Issues)</span>
+                            <span class="stat-count" id="darkCirclesIssuesCount">0</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill dark-circles-issues-progress" id="darkCirclesIssuesProgress"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-item scroll-animate fade-in-up" data-delay="2100">
+                        <div class="stat-header">
+                            <span class="stat-label">Lip (Normal)</span>
+                            <span class="stat-count" id="lipNormalCount">0</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill lip-normal-progress" id="lipNormalProgress"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-item scroll-animate fade-in-up" data-delay="2400">
+                        <div class="stat-header">
+                            <span class="stat-label">Lip (Issues)</span>
+                            <span class="stat-count" id="lipIssuesCount">0</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill lip-issues-progress" id="lipIssuesProgress"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-item scroll-animate fade-in-up" data-delay="2700">
+                        <div class="stat-header">
+                            <span class="stat-label">Skin (Healthy)</span>
+                            <span class="stat-count" id="skinHealthyCount">0</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill skin-healthy-progress" id="skinHealthyProgress"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-item scroll-animate fade-in-up" data-delay="3000">
+                        <div class="stat-header">
+                            <span class="stat-label">Skin (Issues)</span>
+                            <span class="stat-count" id="skinIssuesCount">0</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill skin-issues-progress" id="skinIssuesProgress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Success Modal -->
+<div id="successModal" class="success-modal">
+    <div class="success-modal-content">
+        <div class="success-animation">
+            <div class="checkmark-circle">
+                <div class="checkmark"></div>
+            </div>
+        </div>
+        <h3>上傳成功！</h3>
+        <p>您的照片已成功上傳到系統</p>
+        <div class="filename" id="uploadedFilename"></div>
+        <button class="success-btn" onclick="closeSuccessModal()">確定</button>
+    </div>
+</div>
+
+<script src="{% static 'js/chart.js' %}"></script>
+<script src="{% static 'js/func.js' %}"></script>
+<script src="{% static 'js/time.js' %}"></script>
+<script src="{% static 'js/calendar.js' %}"></script>
+<script src="{% static 'js/scroll-animations.js' %}"></script>
+
+{% endblock content %}

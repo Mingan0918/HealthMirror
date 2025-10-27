@@ -1,0 +1,136 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  
+{% if page == 'login' %}
+<div class="container">
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="" class="login-form" method="POST">
+            {% csrf_token %}
+              
+            <label>Username:</label>
+            <input type="text" name="username" required="True">
+            {% if username_error %}
+                <small style="color: red;">{{ username_error }}</small><br><br>
+            {% endif %}
+
+            <label>Password:</label>
+            <input type="password" name="password" required="True">
+            {% if password_error %}
+                <small style="color: red;">{{ password_error }}</small><br><br>
+            {% endif %}
+
+            <input type="submit" value="Login">
+
+        </form>
+
+        <p class="signup"><a href="{% url 'verifyEmail' %}" >Sign up</a></p>
+
+    </div>
+</div>
+
+{% elif page == 'verifyEmail' %}
+<div class="container">
+    <div class="login-container">
+        <h2>Verify Email</h2>
+        <form action="" method="POST" class="login-form">
+            {% csrf_token %}
+
+            <input type="email" name="email" placeholder="Email" required>
+            {% if messages %}
+                {% for message in messages %}
+                    <small>{{ message }}</small>
+                {% endfor %}
+            {% endif %}
+
+            <input type="submit" value="Send Verify Code">
+        </form>
+        <p class="signup"><a href="{% url 'login' %}" >Log in</a></p>
+    </div>
+</div>
+
+{% elif page == 'verify' %}
+<div class="container">
+    <div class="login-container">
+        <h2>Verify</h2>
+        <form action="" class="login-form" method="POST">
+            {% csrf_token %}
+              
+            <p>Email: {{email}}</p>
+
+            <label>Verify Code:</label>
+            <input type="text" name="code" maxlength="6" required>
+
+            <input type="submit" value="Submit">
+
+        </form>
+
+        <p class="signup"><a href="{% url 'login' %}" >Log in</a></p>
+
+    </div>
+</div>
+
+<!-- {% elif page == 'forgot' %}
+<div class="container">
+    <div class="login-container">
+        <h2>Forgot Password</h2>
+
+    </div>
+</div> -->
+
+{% else %}
+
+<div class="container">
+    <div class="register-container">
+        <h2>Register</h2>
+        <form action="" method="POST" class="login-form">
+            {% csrf_token %}
+        
+            <label>Username:</label>
+            <input type="text" name="username">
+            {% if form.username.errors %}
+                <small class="text-danger">{{ form.username.errors }}</small>
+            {% endif %}
+
+            {% if form.email.errors %}
+                <small class="text-danger">{{ form.email.errors }}</small>
+            {% endif %}
+
+            <label>Password:</label>
+            <input type="password" name="password1">
+            {% if form.password1.errors %}
+                <small class="text-danger">{{ form.password1.errors }}</small>
+            {% endif %}
+
+            <label>Confirm Password:</label>
+            <input type="password" name="password2">
+            {% if form.password2.errors %}
+                <small class="text-danger">{{ form.password2.errors }}</small>
+            {% endif %}
+
+            <label>Gender:</label>
+            <select name="gender">
+                <option value="">Select Gender</option>
+                {% for value, label in form.gender.field.choices %}
+                    <option value="{{ value }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Phone Number:</label>
+            <input type="text" name="phone">
+            {% if form.phone_number.errors %}
+                <small class="text-danger">{{ form.phone_number.errors }}</small>
+            {% endif %}
+
+            <input type="submit" value="Register">
+        </form>
+
+        <p class="signup"><a href="{% url 'login' %}" >Log in</a></p>
+
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock content %}

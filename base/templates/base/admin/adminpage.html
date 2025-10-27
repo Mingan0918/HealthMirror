@@ -1,0 +1,87 @@
+<div class="admin-dashboard">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <h2>Admin Dashboard</h2>
+        <p class="subtitle">Manage system settings and monitor operations</p>
+    </div>
+
+    <!-- Quick Stats Cards -->
+    <div class="stats-grid">
+        <div class="stat-card" onclick="loadPage('user')">
+            <div class="stat-icon"><img src="{% load static %}{% static 'images/User.gif' %}" alt="Users" style="width: 40px; height: 40px;"></div>
+            <div class="stat-content">
+                <h3>Users</h3>
+                <p class="stat-number" id="userCount">-</p>
+                <p class="stat-label">Total Users</p>
+            </div>
+        </div>
+
+        <div class="stat-card" onclick="loadPage('health')">
+            <div class="stat-icon"><img src="{% load static %}{% static 'images/Safe.gif' %}" alt="Health" style="width: 40px; height: 40px;"></div>
+            <div class="stat-content">
+                <h3>Health Status</h3>
+                <p class="stat-number" id="healthCount">-</p>
+                <p class="stat-label">Health Records</p>
+            </div>
+        </div>
+
+        <div class="stat-card" onclick="loadPage('person')">
+            <div class="stat-icon"><img src="{% load static %}{% static 'images/Sreach1.gif' %}" alt="Search" style="width: 40px; height: 40px;"></div>
+            <div class="stat-content">
+                <h3>Detected Persons</h3>
+                <p class="stat-number" id="personCount">-</p>
+                <p class="stat-label">Identified People</p>
+            </div>
+        </div>
+
+        <div class="stat-card" onclick="loadPage('image')">
+            <div class="stat-icon"><img src="{% load static %}{% static 'images/Cam.gif' %}" alt="Camera" style="width: 40px; height: 40px;"></div>
+            <div class="stat-content">
+                <h3>Images</h3>
+                <p class="stat-number" id="imageCount">-</p>
+                <p class="stat-label">Captured Images</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <h3>Quick Actions</h3>
+        <div class="action-buttons">
+            <button class="action-btn primary" onclick="loadPage('user')">
+                <span class="btn-icon"><img src="{% load static %}{% static 'images/Portrait.gif' %}" alt="Portrait" style="width: 30px; height: 30px;"></span>
+                <span class="btn-text">Manage Users</span>
+            </button>
+            <button class="action-btn secondary" onclick="loadPage('health')">
+                <span class="btn-icon"><img src="{% load static %}{% static 'images/Report.gif' %}" alt="Report" style="width: 30px; height: 30px;"></span>
+                <span class="btn-text">View Health Reports</span>
+            </button>
+            <button class="action-btn tertiary" onclick="loadPage('image')">
+                <span class="btn-icon"><img src="{% load static %}{% static 'images/Picture.gif' %}" alt="Picture" style="width: 30px; height: 30px;"></span>
+                <span class="btn-text">Browse Images</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- System Status -->
+    <div class="system-status">
+        <h3>System Status</h3>
+        <div class="status-items">
+            <div class="status-item">
+                <div class="status-indicator active"></div>
+                <span>AI Detection System</span>
+                <span class="status-text">Online</span>
+            </div>
+            <div class="status-item">
+                <div class="status-indicator active"></div>
+                <span>Database Connection</span>
+                <span class="status-text">Connected</span>
+            </div>
+            <div class="status-item">
+                <div class="status-indicator active"></div>
+                <span>Image Processing</span>
+                <span class="status-text">Running</span>
+            </div>
+        </div>
+    </div>
+</div>

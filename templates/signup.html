@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Hospital Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/signup.css' %}">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    
+</head>
+<body>
+<div class="signup-main-container">
+    <div class="signup-left">
+        <div class="bg-svg">
+            
+        </div>
+        <!-- Welcome 動畫 -->
+        <div class="hello-title">
+            <lottie-player
+                src="{% static 'images/welcome.json' %}"
+                background="transparent"
+                speed="1"
+                style="width: 280px; height: 280px;"
+                loop autoplay>
+            </lottie-player>
+        </div>
+    </div>
+
+    <div class="signup-right">
+        <div class="logo-title">
+            <video src="{% static 'images/LOGO.mp4' %}" autoplay loop muted playsinline style="height: 60px;"></video>
+            <span style="margin-left: 12px;">AI Mirror 32</span>
+        </div>
+
+        <form method="post" class="signup-form">
+            {% csrf_token %}
+
+            <!-- Username -->
+            <label for="username">
+                Username
+                <lottie-player
+                    src="{% static 'images/User.json' %}"
+                    background="transparent"
+                    speed="1"
+                    style="width: 30px; height: 20px; float: left;"
+                    loop autoplay>
+                </lottie-player>
+            </label>
+            <input type="text" name="username" id="username" value="{{ username }}" required>
+
+            <!-- Email -->
+            <label for="email">
+                Email
+                <lottie-player
+                    src="{% static 'images/User.json' %}"
+                    background="transparent"
+                    speed="1"
+                    style="width: 30px; height: 20px; float: left;"
+                    loop autoplay>
+                </lottie-player>
+            </label>
+            <input type="email" name="email" id="email" value="{{ email }}" required>
+
+            <!-- Password -->
+            <label for="password">
+                Password
+                <lottie-player
+                    src="{% static 'images/Password.json' %}"
+                    background="transparent"
+                    speed="1"
+                    style="width: 30px; height: 20px; float: left;"
+                    loop autoplay>
+                </lottie-player>
+            </label>
+            <div class="password-wrapper">
+                <input type="password" name="password" id="password" required {% if error %}class="input-error"{% endif %}>
+                <span class="toggle-password" onclick="togglePassword('password')"></span>
+            </div>
+
+            <!-- Confirm Password -->
+            <label for="confirm_password">
+                Confirm Password
+                <lottie-player
+                    src="{% static 'images/Password.json' %}"
+                    background="transparent"
+                    speed="1"
+                    style="width: 30px; height: 20px; float: left;"
+                    loop autoplay>
+                </lottie-player>
+            </label>
+            <div class="password-wrapper">
+                <input type="password" name="confirm_password" id="confirm_password" required {% if error %}class="input-error"{% endif %}>
+                <span class="toggle-password" onclick="togglePassword('confirm_password')"></span>
+            </div>
+
+            {% if error %}
+            <div class="error-msg">{{ error }}</div>
+            {% endif %}
+            <button type="submit" class="signup-btn"><span>Sign Up</span></button>
+        </form>
+
+        <div class="signup-links">
+            <span>Already Have Account? <a href="{% url 'login' %}" class="login-link">Log In</a></span>
+        </div>
+    </div>
+</div>
+
+<script>
+function togglePassword(fieldId) {
+    var pwd = document.getElementById(fieldId);
+    pwd.type = pwd.type === 'password' ? 'text' : 'password';
+}
+
+// 鼠標跟隨光效
+function initMouseFollowLight() {
+    const signupBtn = document.querySelector('.signup-btn');
+    
+    if (signupBtn) {
+        signupBtn.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // 設置CSS變量來控制光效位置
+            this.style.setProperty('--mouse-x', x + 'px');
+            this.style.setProperty('--mouse-y', y + 'px');
+        });
+        
+        signupBtn.addEventListener('mouseleave', function() {
+            // 重置光效位置到中心
+            this.style.setProperty('--mouse-x', '50%');
+            this.style.setProperty('--mouse-y', '50%');
+        });
+    }
+}
+
+// 頁面載入完成後初始化光效
+document.addEventListener('DOMContentLoaded', function() {
+    initMouseFollowLight();
+});
+</script>
+</body>
+</html>

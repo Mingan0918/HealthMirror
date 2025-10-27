@@ -1,0 +1,54 @@
+<div class="content-container">
+    <h2>Detected Person Management</h2>
+    <p class="subtitle">View and manage detected personnel records</p>
+
+    <form method="GET" id="filter-form">
+        <label>Person Name:</label>
+        <input type="text" name="status" value="{% if person_name %}{{ person_name }}{% else %}{{ '' }}{% endif %}">
+
+        <label>Date:</label>
+        <input type="month" id="monthInput" name="date" value="{% if year and month %}{{ year }}-{{ month }}{% endif %}">
+
+        <button type="button" onclick="applyFilter('person')">Filter</button>
+        <button type="button" onclick="loadPage('person')">Reset</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Person Name</th>
+                <th>Created</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for person in personRecords %}
+            <tr>
+                <td>{{ person }}</td>
+                <td>{{ person.created }}</td>
+                <td>
+                    <button onclick="deleteRecord('person', '{{ person.id }}')">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="pagination">
+        <div class="prevbutton">
+            {% if personRecords.has_previous %}
+            <button onclick="applyFilter('person', 1)">First</button>
+            <button onclick="applyFilter('person', '{{ personRecords.previous_page_number }}')">Prev</button>
+            {% endif %}
+        </div>
+
+        <div>
+            <span>Page {{ personRecords.number }} of {{ personRecords.paginator.num_pages }}</span>
+        </div>
+
+        <div class="nextbutton">
+            {% if personRecords.has_next %}
+            <button onclick="applyFilter('person', '{{ personRecords.next_page_number }}')">Next</button>
+            <button onclick="applyFilter('person', '{{ personRecords.paginator.num_pages }}')">Last</button>
+            {% endif %}
+        </div>
+    </div>
+</div>
