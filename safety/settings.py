@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-t3c7bmy_^v)aual@s+@*(!e_av%hs*k^q$e_s!mmq4yktvng0p"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = FALSE
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -144,4 +144,5 @@ EMAIL_HOST_PASSWORD = 'pvtu xkbd axls ibhk'
 # Media path
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
 
