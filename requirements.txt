@@ -4,3 +4,6 @@ whitenoise
 reportlab
 opencv-python-headless
 ultralytics
+insightface
+onnxruntime
+numpy
