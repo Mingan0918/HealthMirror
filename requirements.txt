@@ -3,3 +3,4 @@ gunicorn
 whitenoise
 reportlab
 opencv-python-headless
+ultralytics
